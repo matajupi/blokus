@@ -1,4 +1,4 @@
 # Project exclude paths
 /env/
-/work/
-/out/
+work/
+out/
