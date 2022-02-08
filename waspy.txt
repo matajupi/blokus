@@ -1,0 +1,46 @@
+・method
+start_game(id: int, minos: list[dict[id: int, field: list[list[int]]]]):
+ゲーム開始時にServerからClientに送信。
+idは自分のID
+
+mino_placed(id: int, owner: int, rotate_times: int, flipped: boolean, row: int, col: int):
+ミノがフィルドに置かれた時にServerからClientに送信。
+
+get_place_mino_info():
+ミノがフィールドに置かれた座標を取得する時にServerからClientに送信。
+（Clientに任意の場所にミノをおいてほしいという意味。）
+返答：reply(id: int, row: int, col: int, rotate_times(left): int,
+    flipped: boolean)
+注意：row, colはMinoの単位長方形の左上のマスを指す
+
+invalid_mino_placed_location():
+get_place_mino_infoで取得したミノが置かれた座標が不正だった時にServerからClientに送信。
+
+skip_turn():
+Clientがルール上ミノをおけない状況にあるときServerからClientに送信。
+
+finish_game(winners: list, num_prev_minos: list):
+ゲーム終了時に勝者などを載せてServerからClientに送られる。
+winners.lengthが0だったらdraw
+
+exception_occurred(message: str):
+Server側で何らかの障害などが起きてゲームが続行できない時にServerからClientに送信。
+
+reply(...):
+何らかのメソッドを受け取りそれの返信をするときClientからServerに送信。
+
+test(message: str):
+疎通テスト用
+
+・以下今回は使わないが一応仕様に入れておくmethod
+cannot_start_game():
+何らかの原因でゲームが開始できない時にServerからClientに送信。
+
+pause_game():
+何らかの原因でゲームを一時停止させる時にServerからClientに送信。
+
+resume_game():
+pause_gameで一時停止していたゲームを再開する時にServerからClientに送信。
+
+time_out():
+Client側の操作がタイムアウトした時にServerからClientに送信。
